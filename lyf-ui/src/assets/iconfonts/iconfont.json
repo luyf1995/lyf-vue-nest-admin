@@ -1,0 +1,100 @@
+{
+  "id": "4069743",
+  "name": "lyf-admin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "vite+nestjs 构建的后台权限系统",
+  "glyphs": [
+    {
+      "icon_id": "577364",
+      "name": "首页",
+      "font_class": "menu-shouye",
+      "unicode": "e751",
+      "unicode_decimal": 59217
+    },
+    {
+      "icon_id": "947487",
+      "name": "系统",
+      "font_class": "menu-xitong",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "8605760",
+      "name": "用户管理",
+      "font_class": "menu-yonghu",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "10213489",
+      "name": "角色管理",
+      "font_class": "menu-jiaose",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "20853347",
+      "name": "权限管理",
+      "font_class": "menu-quanxian",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "24848374",
+      "name": "部门管理",
+      "font_class": "menu-bumen",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "15838563",
+      "name": "close-bold",
+      "font_class": "close-bold",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "672036",
+      "name": "下拉",
+      "font_class": "xiala",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "7450657",
+      "name": "展开",
+      "font_class": "zhankai",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "8224841",
+      "name": "收缩",
+      "font_class": "shousuo",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "6598347",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e8ef",
+      "unicode_decimal": 59631
+    },
+    {
+      "icon_id": "5387604",
+      "name": "取消全屏",
+      "font_class": "quxiaoquanping",
+      "unicode": "eb10",
+      "unicode_decimal": 60176
+    },
+    {
+      "icon_id": "5387606",
+      "name": "全屏",
+      "font_class": "quanping",
+      "unicode": "eb11",
+      "unicode_decimal": 60177
+    }
+  ]
+}

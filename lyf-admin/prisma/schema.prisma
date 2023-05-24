@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// 用户
+model User {
+  id          Int     @id @default(autoincrement())
+  // 用户名
+  username    String  @unique @db.VarChar(255)
+  // 密码
+  password    String  @db.VarChar()
+  // 姓名
+  nickname    String  @db.VarChar(20)
+  // 手机号码
+  phoneNumber String? @map("phone_number") @db.VarChar(20)
+  // 性别 1=>男 2=>女 3=>未知
+  sex         Int?    @default(3) @db.Integer()
+  // 状态 1=>正常 2=>停用
+  status      Int     @default(1)
+
+  // 部门
+  departmentId Int?        @map("department_id")
+  department   Department? @relation(fields: [departmentId], references: [id])
+
+  // 创建时间
+  createTime DateTime @default(now()) @map("create_time")
+  // 编辑时间
+  updateTime DateTime @updatedAt() @map("update_time")
+
+  // 是否逻辑删除
+  isDelete Boolean @default(false) @map("is_delete")
+
+  userRole UserRole[]
+
+  @@index([departmentId])
+  @@map("sys_user")
+}
+
+// 部门
+model Department {
+  id         Int      @id @default(autoincrement())
+  // 部门名称
+  name       String   @db.VarChar(255)
+  // 排序
+  sort       Int      @default(1)
+  // 父ID
+  parentId   Int      @map("parent_id")
+  // 创建时间
+  createTime DateTime @default(now()) @map("create_time")
+  // 修改时间
+  updateTime DateTime @updatedAt @map("update_time")
+  // 是否逻辑删除
+  isDelete   Boolean  @default(false) @map("is_delete")
+
+  User User[]
+
+  @@map("department")
+}
+
+model Permission {
+  id         Int      @id @default(autoincrement())
+  // 标识
+  code       String?  @unique @db.VarChar(255)
+  // 名称
+  name       String   @db.VarChar(255)
+  // 类型 1=>菜单权限 2=>操作权限
+  type       Int
+  // 父节点ID
+  parentId   Int      @map("parent_id")
+  // 创建时间 
+  createTime DateTime @default(now()) @map("create_time")
+  // 编辑时间
+  updateTime DateTime @updatedAt @map("update_time")
+  // 排序
+  sort       Int      @default(1)
+
+  rolePermissions RolePermission[]
+
+  @@map("permission")
+}
+
+model Role {
+  id         Int      @id @default(autoincrement())
+  // 名称
+  name       String   @db.VarChar(255)
+  // 标识
+  code       String   @unique @db.VarChar(255)
+  // 排序
+  sort       Int      @default(1)
+  // 创建时间
+  createTime DateTime @default(now()) @map("create_time")
+  // 编辑时间
+  updateTime DateTime @updatedAt @map("update_time")
+
+  rolePermissions RolePermission[]
+
+  userRole UserRole[]
+
+  @@map("role")
+}
+
+model RolePermission {
+  id           Int         @id @default(autoincrement())
+  // 角色ID
+  roleId       Int?        @map("role_id")
+  role         Role?       @relation(fields: [roleId], references: [id])
+  // 权限ID
+  permissionId Int?        @map("permission_id")
+  permission   Permission? @relation(fields: [permissionId], references: [id])
+
+  @@index([roleId])
+  @@index([permissionId])
+  @@map("role_permission")
+}
+
+model UserRole {
+  id Int @id @default(autoincrement())
+
+  // 用户ID
+  userId Int?  @map("user_id")
+  user   User? @relation(fields: [userId], references: [id])
+
+  // 角色ID
+  roleId Int?  @map("role_id")
+  role   Role? @relation(fields: [roleId], references: [id])
+
+  @@index([userId])
+  @@index([roleId])
+  @@map("user_role")
+}

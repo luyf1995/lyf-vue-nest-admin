@@ -1,0 +1,29 @@
+.el-button {
+  border-radius: 3px;
+  height: 30px;
+}
+.el-table {
+  .el-table__header {
+    .el-table__cell {
+      background-color: #f8f8f9 !important;
+    }
+  }
+  .el-table__cell {
+    padding: 10px 0;
+  }
+  .el-table__header-wrapper,
+  .el-table__fixed-header-wrapper {
+    th {
+      word-break: break-word;
+      background-color: #f8f8f9;
+      color: #515a6e;
+      height: 40px;
+      font-size: 13px;
+    }
+  }
+  .el-table__body-wrapper {
+    .el-button [class*='el-icon-'] + span {
+      margin-left: 1px;
+    }
+  }
+}

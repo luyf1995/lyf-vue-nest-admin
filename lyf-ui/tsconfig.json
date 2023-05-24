@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["vite/client", "jest"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/layout/sidebar/sidebar-item/item.jsx",
+    "src/layout/sidebar/sidebar-item/item.jsx",
+    "src/utils/utils.js"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
