@@ -8,7 +8,6 @@ import {
   Put,
   Query,
   Req,
-  UseGuards,
   UsePipes
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -20,23 +19,13 @@ import {
   ChangeStatusDto,
   ResetPasswordDto
 } from './dto/request.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { PaginationPipe } from 'src/common/pipes/pagination.pipe';
 import { Permission } from 'src/common/decorators/permission.decorator';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {
-    this.initAdminUser();
-  }
-  /**
-   * 初始化管理员用户
-   */
-  async initAdminUser() {
-    this.userService.initAdminUser();
-  }
-
+  constructor(private readonly userService: UserService) {}
   /**
    * 获取当前系统用户信息
    */

@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { KEEP_KEY } from '../contants/decorator.content';
+import { KEEP_KEY } from '../constants/decorator.constant';
 
 /**
  * 不转化成JSON结构，保留原有返回

@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "start:debug",
+      "group": "rebuild",
+      "problemMatcher": [],
+      "label": "npm: start:debug",
+      "detail": "cross-env NODE_ENV=development nest start --debug --watch"
+    }
+  ]
+}

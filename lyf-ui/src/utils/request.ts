@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import router from '@/router/index'
 import { ElMessage, ElLoading } from 'element-plus'
 
-import { Code, IResponse } from '@/types/axios'
+import { Code, IResponse } from '@/api/common/types'
 import { API_BASE } from '@/api/common/index'
 import { useUserStore } from '@/store/index'
 
@@ -36,7 +36,7 @@ request.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     !userStore && (userStore = useUserStore())
 
-    config.headers!['Authorization'] = 'Bearer ' + userStore.token
+    config!.headers!.Authorization = 'Bearer ' + userStore.token
     const url = config.url
     if (queue.size === 0) {
       loadingInstance = ElLoading.service({
@@ -60,7 +60,7 @@ request.interceptors.response.use(
   (response: AxiosResponse) => {
     removeQueueAndCancelLoading(response.config.url)
 
-    const { code, message }: IResponse = response.data
+    const { code, message }: IResponse<any> = response.data
     if (code === Code.SUCCCESS) {
       return response.data
     } else if (code === Code.UNAUTHORIZED) {

@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider     = "postgresql"
+  provider     = "mysql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -14,13 +14,13 @@ model User {
   // 用户名
   username    String  @unique @db.VarChar(255)
   // 密码
-  password    String  @db.VarChar()
+  password    String  @db.VarChar(255)
   // 姓名
   nickname    String  @db.VarChar(20)
   // 手机号码
   phoneNumber String? @map("phone_number") @db.VarChar(20)
   // 性别 1=>男 2=>女 3=>未知
-  sex         Int?    @default(3) @db.Integer()
+  sex         Int?    @default(3)
   // 状态 1=>正常 2=>停用
   status      Int     @default(1)
 
@@ -29,9 +29,9 @@ model User {
   department   Department? @relation(fields: [departmentId], references: [id])
 
   // 创建时间
-  createTime DateTime @default(now()) @map("create_time")
+  createTime DateTime? @default(now()) @map("create_time")
   // 编辑时间
-  updateTime DateTime @updatedAt() @map("update_time")
+  updateTime DateTime? @updatedAt() @map("update_time")
 
   // 是否逻辑删除
   isDelete Boolean @default(false) @map("is_delete")
@@ -44,19 +44,19 @@ model User {
 
 // 部门
 model Department {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   // 部门名称
-  name       String   @db.VarChar(255)
+  name       String    @db.VarChar(255)
   // 排序
-  sort       Int      @default(1)
+  sort       Int?      @default(1)
   // 父ID
-  parentId   Int      @map("parent_id")
+  parentId   Int       @map("parent_id")
   // 创建时间
-  createTime DateTime @default(now()) @map("create_time")
+  createTime DateTime? @default(now()) @map("create_time")
   // 修改时间
-  updateTime DateTime @updatedAt @map("update_time")
+  updateTime DateTime? @updatedAt @map("update_time")
   // 是否逻辑删除
-  isDelete   Boolean  @default(false) @map("is_delete")
+  isDelete   Boolean   @default(false) @map("is_delete")
 
   User User[]
 
@@ -64,21 +64,21 @@ model Department {
 }
 
 model Permission {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   // 标识
-  code       String?  @unique @db.VarChar(255)
+  code       String?   @unique @db.VarChar(255)
   // 名称
-  name       String   @db.VarChar(255)
+  name       String    @db.VarChar(255)
   // 类型 1=>菜单权限 2=>操作权限
   type       Int
   // 父节点ID
-  parentId   Int      @map("parent_id")
+  parentId   Int       @map("parent_id")
   // 创建时间 
-  createTime DateTime @default(now()) @map("create_time")
+  createTime DateTime? @default(now()) @map("create_time")
   // 编辑时间
-  updateTime DateTime @updatedAt @map("update_time")
+  updateTime DateTime? @updatedAt @map("update_time")
   // 排序
-  sort       Int      @default(1)
+  sort       Int?      @default(1)
 
   rolePermissions RolePermission[]
 
@@ -86,17 +86,17 @@ model Permission {
 }
 
 model Role {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   // 名称
-  name       String   @db.VarChar(255)
+  name       String    @db.VarChar(255)
   // 标识
-  code       String   @unique @db.VarChar(255)
+  code       String    @unique @db.VarChar(255)
   // 排序
-  sort       Int      @default(1)
+  sort       Int?      @default(1)
   // 创建时间
-  createTime DateTime @default(now()) @map("create_time")
+  createTime DateTime? @default(now()) @map("create_time")
   // 编辑时间
-  updateTime DateTime @updatedAt @map("update_time")
+  updateTime DateTime? @updatedAt @map("update_time")
 
   rolePermissions RolePermission[]
 

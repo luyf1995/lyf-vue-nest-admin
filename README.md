@@ -7,7 +7,7 @@
 - 前端采用 Vite、Vue3、Pinia、Typescript、Element-Plus。
 - 后端采用 NestJs、Prisma。
 - 权限认证使用 Jwt。
-- 数据库使用 PostgreSQL
+- 数据库使用 Mysql
   <br>
 
 ## 本地开发
@@ -27,7 +27,7 @@
 
 ### 后端
 
-默认使用 PostgreSQL 数据库，在 <code>.env</code> 文件中可以修改数据库类型、用户名、密码、地址、数据库名以及模式，详情见<a href="https://prisma.yoga/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgres">Prisma 官方文档</a>
+默认使用 Mysql 数据库，在 <code>.env</code> 文件中可以修改数据库类型、用户名、密码、地址、数据库名以及模式，详情见<a href="https://prisma.yoga/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgres">Prisma 官方文档</a>
 
 <code>
   #进入后端目录<br>
@@ -36,8 +36,8 @@
   npm install<br>
   # 数据库迁移（创建数据库表）<br>
   npm run migrate:dev<br>
-  # 数据库执行初始化权限表sql文件<br>
-  ./db/permission.sql<br>
+  # 数据库执行初始化sql文件<br>
+  ./db/lyf_20230526.sql<br>
   # 运行<br>
   npm run start:dev<br>
 </code>

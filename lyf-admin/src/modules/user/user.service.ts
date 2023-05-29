@@ -13,10 +13,9 @@ import { PrismaService } from '../prisma/prisma.service';
 import { DepartmentService } from '../department/department.service';
 import { UtilsService } from '../shared/utils.service';
 import { BcryptService } from '../shared/bcrypt.service';
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { RoleService } from '../role/role.service';
-import { PermissionTypeEnum } from '../permission/utils';
-import { ADMIN_USER } from './utils';
+import { ADMIN_USER_ID } from 'src/common/constants/admin.constant';
 
 /**
  * 通过部门id找寻所有子孙部门id
@@ -46,20 +45,11 @@ export class UserService {
     private readonly bcrypt: BcryptService
   ) {}
   /**
-   * 初始化管理员角色
-   */
-  async initAdminUser() {
-    const admin = await this.getUserById(ADMIN_USER.id);
-    if (!admin) {
-      this.createUser(ADMIN_USER);
-    }
-  }
-  /**
    * 是否是系统管理员用户
    * @param {number} id
    */
   isAdminUser(id: number) {
-    return ADMIN_USER.id === id;
+    return id === ADMIN_USER_ID;
   }
   /**
    * 获取当前用户信息

@@ -29,6 +29,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': [0], // 允许空方法体
     '@typescript-eslint/no-this-alias': 0, // 允许this的复制
     '@typescript-eslint/no-inferrable-types': [0, 'ignore-params', 'ignore-properties'],
+    '@typescript-eslint/no-non-null-assertion': 0,
     'array-callback-return': 1, // return 后面是否允许省略
     'arrow-parens': ['error', 'as-needed'], // 箭头函数的参数可以不使用圆括号
     'consistent-return': 0, // 要求 return 语句要么总是指定返回的值，要么不指定

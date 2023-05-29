@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
-import { PERMISSION_KEY } from '../contants/decorator.content';
+import { PERMISSION_KEY } from '../constants/decorator.constant';
 
 export interface PermissionData {
   permissions: string[];

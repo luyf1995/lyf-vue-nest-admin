@@ -4,7 +4,7 @@ import { CreateRoleDto, ListQueryDto, UpdateRoleDto } from './dto/request.dto';
 import { UtilsService } from '../shared/utils.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
-import { ADMIN_ROLE } from './utils';
+import { ADMIN_ROLE_ID } from 'src/common/constants/admin.constant';
 
 @Injectable()
 export class RoleService {
@@ -13,20 +13,11 @@ export class RoleService {
     private readonly utils: UtilsService
   ) {}
   /**
-   * 初始化管理员角色
-   */
-  async initAdminRole() {
-    const admin = await this.getRoleByCode(ADMIN_ROLE.code);
-    if (!admin) {
-      this.createRole(ADMIN_ROLE);
-    }
-  }
-  /**
    * 是否是系统管理员角色
    * @param {number} id
    */
   isAdminRole(id: number) {
-    return ADMIN_ROLE.id === id;
+    return id === ADMIN_ROLE_ID;
   }
 
   /**
@@ -96,18 +87,17 @@ export class RoleService {
    */
   async getPermissionsByRoleId(roleId: number) {
     // admin获取所有权限
-    const whereQuery: Prisma.PermissionFindManyArgs =
-      roleId === ADMIN_ROLE.id
-        ? {}
-        : {
-            where: {
-              rolePermissions: {
-                some: {
-                  roleId
-                }
+    const whereQuery: Prisma.PermissionFindManyArgs = this.isAdminRole(roleId)
+      ? {}
+      : {
+          where: {
+            rolePermissions: {
+              some: {
+                roleId
               }
             }
-          };
+          }
+        };
 
     return await this.prisma.permission.findMany(whereQuery);
   }
@@ -118,7 +108,7 @@ export class RoleService {
   async getPermissionsByRoleIds(roleIds: number[]) {
     // admin获取所有权限
     const whereQuery: Prisma.PermissionFindManyArgs = roleIds.includes(
-      ADMIN_ROLE.id
+      ADMIN_ROLE_ID
     )
       ? {}
       : {
@@ -192,8 +182,7 @@ export class RoleService {
         }
       };
     }
-
-    await this.prisma.role.create({
+    return await this.prisma.role.create({
       data: roleCreateInput
     });
   }

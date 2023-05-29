@@ -7,7 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { KEEP_KEY } from '../contants/decorator.content';
+import { KEEP_KEY } from '../constants/decorator.constant';
 import { ResponseResult } from './response-result';
 
 // 响应格式统一

@@ -14,15 +14,7 @@ import { Permission } from 'src/common/decorators/permission.decorator';
 
 @Controller('role')
 export class RoleController {
-  constructor(private readonly roleService: RoleService) {
-    this.initAdminRole();
-  }
-  /**
-   * 初始化管理员角色
-   */
-  async initAdminRole() {
-    this.roleService.initAdminRole();
-  }
+  constructor(private readonly roleService: RoleService) {}
   /**
    * 查询所有角色
    */
