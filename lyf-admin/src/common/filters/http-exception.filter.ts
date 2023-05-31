@@ -6,7 +6,7 @@ import {
   HttpStatus
 } from '@nestjs/common';
 import { ApiException } from '../exceptions/api-exception';
-import { ResponseResult } from '../interceptors/response-result';
+import { ResponseResultDto } from 'src/common/dto/result-response.dto';
 
 // 自定义错误拦截
 @Catch()
@@ -39,7 +39,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     }
     return {
       status,
-      result: ResponseResult.error(message, code)
+      result: ResponseResultDto.error(message, code)
     };
   }
 }

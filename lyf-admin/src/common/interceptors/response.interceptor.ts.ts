@@ -8,7 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { KEEP_KEY } from '../constants/decorator.constant';
-import { ResponseResult } from './response-result';
+import { ResponseResultDto } from 'src/common/dto/result-response.dto';
 
 // 响应格式统一
 @Injectable()
@@ -24,11 +24,11 @@ export class ResponseInterceptor implements NestInterceptor {
         ]);
         if (keep) return data;
 
-        if (data instanceof ResponseResult) return data;
+        if (data instanceof ResponseResultDto) return data;
 
         const response = context.switchToHttp().getResponse();
         response.header('Content-Type', 'application/json; charset=utf-8');
-        return ResponseResult.success(data);
+        return ResponseResultDto.success(data);
       })
     );
   }

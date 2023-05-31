@@ -1,5 +1,5 @@
 import { HttpException } from '@nestjs/common';
-import { ResponseStatusEnum } from '../interceptors/response-result';
+import { ResponseStatusEnum } from 'src/common/dto/result-response.dto';
 
 // 自定义错误处理
 export class ApiException extends HttpException {

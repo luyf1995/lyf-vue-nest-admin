@@ -64,7 +64,9 @@ export class UserService {
       roleIds || []
     );
 
-    userInfo.permissions = permissions.map((item) => item.code);
+    userInfo.permissions = permissions
+      .filter((item) => !this.utils.isEmpty(item.code))
+      .map((item) => item.code);
 
     return userInfo;
   }
@@ -313,7 +315,7 @@ export class UserService {
       };
     }
 
-    return await this.prisma.user.create({
+    await this.prisma.user.create({
       data: userCreateInput
     });
   }
@@ -376,7 +378,7 @@ export class UserService {
       }
     }
 
-    return await this.prisma.user.update({
+    await this.prisma.user.update({
       where: {
         id: updateUserDto.id
       },
@@ -418,7 +420,7 @@ export class UserService {
       throw new ApiException('状态参数有误！');
     }
 
-    return await this.prisma.user.update({
+    await this.prisma.user.update({
       where: {
         id: changeStatusDto.id
       },
@@ -443,7 +445,7 @@ export class UserService {
 
     const hashedPwd = await this.bcrypt.hash(resetPasswordDto.password);
 
-    return await this.prisma.user.update({
+    await this.prisma.user.update({
       where: {
         id: resetPasswordDto.id
       },

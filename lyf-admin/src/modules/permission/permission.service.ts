@@ -86,7 +86,7 @@ export class PermissionService {
       // 目录权限
       createPermissionDto = omit(createPermissionDto, 'code');
     }
-    return await this.prisma.permission.create({
+    await this.prisma.permission.create({
       data: createPermissionDto
     });
   }
@@ -100,7 +100,7 @@ export class PermissionService {
     if (!permission) {
       throw new ApiException('权限不存在！');
     }
-    return await this.prisma.permission.update({
+    await this.prisma.permission.update({
       data: updatePermissionDto,
       where: {
         id: updatePermissionDto.id
@@ -146,11 +146,6 @@ export class PermissionService {
       }
     });
 
-    const transaction = await this.prisma.$transaction([
-      deleteRolePermission,
-      deletePermission
-    ]);
-
-    return transaction;
+    await this.prisma.$transaction([deleteRolePermission, deletePermission]);
   }
 }

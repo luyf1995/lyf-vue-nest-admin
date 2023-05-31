@@ -1,14 +1,16 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsNumber, IsOptional } from 'class-validator';
 
+// 分页请求DTO
 export class PaginationDto {
-  // 当前页
+  @ApiProperty({ description: '当前页码' })
   @IsOptional()
   @Type()
   @IsNumber()
   pageNum?: number;
 
-  // 每页条数
+  @ApiProperty({ description: '每页条数' })
   @IsOptional()
   @Type()
   @IsNumber()

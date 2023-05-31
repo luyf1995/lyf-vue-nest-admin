@@ -2,6 +2,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ResponseInterceptor } from 'src/common/interceptors/response.interceptor.ts';
 import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
@@ -26,6 +27,16 @@ async function bootstrap() {
 
   // 跨域
   app.enableCors();
+
+  // swagger文档
+  const config = new DocumentBuilder()
+    .setTitle('lyf-admin')
+    .setDescription('lyf-admin接口文档')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger', app, document);
 
   await app.listen(8888);
 }

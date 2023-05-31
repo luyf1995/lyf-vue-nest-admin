@@ -84,7 +84,7 @@ export class DepartmentService {
       throw new ApiException('父部门不存在！');
     }
 
-    return await this.prisma.department.create({
+    await this.prisma.department.create({
       data: createDeptDto
     });
   }
@@ -97,7 +97,7 @@ export class DepartmentService {
     if (!dept) {
       throw new ApiException('部门信息不存在');
     }
-    return this.prisma.department.update({
+    this.prisma.department.update({
       where: { id: updateDeptDto.id },
       data: updateDeptDto
     });
@@ -123,9 +123,7 @@ export class DepartmentService {
       throw new ApiException('当前部门下存在子部门，不可删除！');
     }
 
-    // 校验是否有用户绑定了当前部门
-
-    return await this.prisma.department.update({
+    await this.prisma.department.update({
       where: {
         id
       },

@@ -21,10 +21,10 @@ export class RoleService {
   }
 
   /**
-   * 查询所有角色
+   * 查询角色列表
    * @param {ListQueryDto} query
    */
-  async getAllRoleList(query: ListQueryDto) {
+  async getRoleList(query: ListQueryDto) {
     return this.prisma.role.findMany({
       where: {
         AND: [
@@ -182,7 +182,7 @@ export class RoleService {
         }
       };
     }
-    return await this.prisma.role.create({
+    await this.prisma.role.create({
       data: roleCreateInput
     });
   }
@@ -207,7 +207,7 @@ export class RoleService {
       };
     });
 
-    await this.prisma.role.update({
+    this.prisma.role.update({
       where: {
         id: updateRoleDto.id
       },
