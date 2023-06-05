@@ -8,7 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { KEEP_KEY } from '../constants/decorator.constant';
-import { ResponseResultDto } from 'src/common/dto/result-response.dto';
+import { ResponseResultDto } from 'src/common/dtos/result-response.dto';
 
 // 响应格式统一
 @Injectable()

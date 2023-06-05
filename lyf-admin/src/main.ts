@@ -4,6 +4,7 @@ import { ResponseInterceptor } from 'src/common/interceptors/response.intercepto
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { LoggerService } from './modules/shared/logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,12 +19,12 @@ async function bootstrap() {
     new ValidationPipe({
       transform: true, // 原始类型的转换，如string转化为number
       whitelist: true // 不会接受dto定义以外的属性
-      // forbidNonWhitelisted: true, // 如果传入dto定义意外的属性，服务端则会报400错
+      // forbidNonWhitelisted: true, // 如果传入dto定义以外的属性，服务端则会报400错
     })
   );
 
   // execption，报错过滤器
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter(new LoggerService()));
 
   // 跨域
   app.enableCors();

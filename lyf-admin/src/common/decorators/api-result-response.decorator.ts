@@ -1,7 +1,7 @@
 import { Type, applyDecorators } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
-import { ResponseResultDto } from 'src/common/dto/result-response.dto';
-import { PaginatedDto } from '../dto/paginated.dto';
+import { ResponseResultDto } from 'src/common/dtos/result-response.dto';
+import { PaginatedDto } from 'src/common/dtos/paginated.dto';
 
 const baseTypeNames = ['String', 'Number', 'Boolean'];
 /**

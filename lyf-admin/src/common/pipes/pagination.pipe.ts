@@ -1,5 +1,5 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { PaginationDto } from '../dto/pagination.dto';
+import { PaginationDto } from '../dtos/pagination.dto';
 
 /**
  * 分页器管道

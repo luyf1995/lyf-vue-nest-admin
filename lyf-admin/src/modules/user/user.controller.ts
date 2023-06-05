@@ -23,7 +23,7 @@ import { PaginationPipe } from 'src/common/pipes/pagination.pipe';
 import { Permission } from 'src/common/decorators/permission.decorator';
 import { ApiResultResponse } from 'src/common/decorators/api-result-response.decorator';
 import { CurrentUserDto, UserDto } from './dto/response.dto';
-import { PaginatedDto } from 'src/common/dto/paginated.dto';
+import { PaginatedDto } from 'src/common/dtos/paginated.dto';
 
 @ApiTags('用户管理')
 @Controller('user')

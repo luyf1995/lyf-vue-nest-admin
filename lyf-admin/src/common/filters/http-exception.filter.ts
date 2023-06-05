@@ -6,17 +6,22 @@ import {
   HttpStatus
 } from '@nestjs/common';
 import { ApiException } from '../exceptions/api-exception';
-import { ResponseResultDto } from 'src/common/dto/result-response.dto';
+import { ResponseResultDto } from 'src/common/dtos/result-response.dto';
+import { LoggerService } from 'src/modules/shared/logger.service';
 
 // 自定义错误拦截
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
+  constructor(private readonly logger: LoggerService) {}
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
+    const request = ctx.getRequest();
     const response = ctx.getResponse();
     const { status, result } = this.errorResult(exception);
     response.header('Content-Type', 'application/json; charset=utf-8');
     response.status(status).json(result);
+
+    this.logger.error(`${request.method} ${request.url}`, result.message);
   }
   /* 解析错误类型，获取状态码和返回值 */
   errorResult(exception: HttpException) {
