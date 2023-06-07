@@ -25,7 +25,7 @@ export class BaseController {
   @ApiResultResponse()
   @Post('/logout')
   async logout(@Req() req) {
-    const token = req.headers?.authorization?.slice(7);
-    return this.baseService.logout(token);
+    const { userId } = req.user;
+    return this.baseService.logout(userId);
   }
 }

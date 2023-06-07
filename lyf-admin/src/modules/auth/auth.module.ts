@@ -14,8 +14,8 @@ import { jwtConstants } from './auth.constant';
       defaultStrategy: 'jwt'
     }),
     JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '24h' } // token 过期时效
+      secret: jwtConstants.secret
+      // signOptions: { expiresIn: '24h' } // 用redis管理token的过期时间
     })
   ],
   controllers: [],

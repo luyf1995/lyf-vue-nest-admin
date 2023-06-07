@@ -1,14 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
 import { User } from '@prisma/client';
-import { LoggerService } from '../shared/logger.service';
 
 @Injectable()
 export class BaseService {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly logger: LoggerService
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   /**
    * 登录
@@ -20,9 +16,9 @@ export class BaseService {
   }
   /**
    * 登出
-   * @param {string} token
+   * @param {number} userId
    */
-  async logout(token: string) {
-    return this.authService.removeToken(token);
+  async logout(userId: number) {
+    return this.authService.removeToken(userId);
   }
 }

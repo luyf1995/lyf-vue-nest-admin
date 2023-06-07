@@ -7,7 +7,7 @@
 - 前端采用 Vite、Vue3、Pinia、Typescript、Element-Plus。
 - 后端采用 NestJs、Prisma。
 - 权限认证使用 Jwt。
-- 数据库使用 Mysql
+- 数据库使用 Mysql、Redis
   <br>
 
 ## 本地开发
@@ -37,7 +37,7 @@
   # 数据库迁移（创建数据库表）<br>
   npm run migrate:dev<br>
   # 数据库执行初始化sql文件<br>
-  ./db/lyf_20230526.sql<br>
+  ./db/lyf.sql<br>
   # 运行<br>
   npm run start:dev<br>
 </code>

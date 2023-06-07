@@ -21,7 +21,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     response.header('Content-Type', 'application/json; charset=utf-8');
     response.status(status).json(result);
 
-    this.logger.error(`${request.method} ${request.url}`, result.message);
+    this.logger.error(
+      `${request.method} ${request.url} params:${JSON.stringify({
+        params: request.params,
+        query: request.query,
+        body: request.body
+      })}`,
+      result.message
+    );
   }
   /* 解析错误类型，获取状态码和返回值 */
   errorResult(exception: HttpException) {

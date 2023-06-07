@@ -6,6 +6,7 @@ import Configuration from './config/configuration';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './modules/prisma/prisma.module';
+import { RedisModule } from './modules/redis/redis.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
@@ -24,6 +25,7 @@ import { PermissionAuthGuard } from 'src/common/guards/permissions.auth.guard';
       load: [Configuration]
     }),
     PrismaModule,
+    RedisModule,
     SharedModule,
     UserModule,
     AuthModule,

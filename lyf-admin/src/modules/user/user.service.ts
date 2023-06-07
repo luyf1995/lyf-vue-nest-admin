@@ -16,6 +16,8 @@ import { BcryptService } from '../shared/bcrypt.service';
 import { Prisma } from '@prisma/client';
 import { RoleService } from '../role/role.service';
 import { ADMIN_USER_ID } from 'src/common/constants/admin.constant';
+import { RedisService } from '../redis/redis.service';
+import { USER_PERMISSION_KEY } from 'src/common/constants/redis.contant';
 
 /**
  * 通过部门id找寻所有子孙部门id
@@ -42,7 +44,8 @@ export class UserService {
     private readonly departmentService: DepartmentService,
     private readonly roleService: RoleService,
     private readonly utils: UtilsService,
-    private readonly bcrypt: BcryptService
+    private readonly bcrypt: BcryptService,
+    private readonly redis: RedisService
   ) {}
   /**
    * 是否是系统管理员用户
@@ -64,9 +67,17 @@ export class UserService {
       roleIds || []
     );
 
-    userInfo.permissions = permissions
+    const permissionCodes = permissions
       .filter((item) => !this.utils.isEmpty(item.code))
       .map((item) => item.code);
+
+    userInfo.permissions = permissionCodes;
+
+    // 缓存
+    this.redis.set(
+      `${USER_PERMISSION_KEY}:${id}`,
+      JSON.stringify(permissionCodes)
+    );
 
     return userInfo;
   }
