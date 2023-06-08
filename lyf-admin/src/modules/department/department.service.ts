@@ -97,7 +97,7 @@ export class DepartmentService {
     if (!dept) {
       throw new ApiException('部门信息不存在');
     }
-    this.prisma.department.update({
+    await this.prisma.department.update({
       where: { id: updateDeptDto.id },
       data: updateDeptDto
     });
